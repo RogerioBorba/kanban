@@ -97,11 +97,12 @@ class ImpedimentSerializer(ModelSerializer):
 
 class ProjectSerializer(ModelSerializer):
     tasks = HyperlinkedRelatedField(view_name='scrum:Task_detail', many=True, read_only=True)
+    sprints = HyperlinkedRelatedField(view_name='scrum:Sprint_detail', many=True, read_only=True)
     technical_responsible = HyperlinkedRelatedField(view_name='scrum:ScrumUser_detail', many=False, read_only=True)
     administrative_responsible = HyperlinkedRelatedField(view_name='scrum:ScrumUser_detail', many=False, read_only=True)
     class Meta:
         model = Project
-        fields = ['tasks','id','name','description','start','end','technical_responsible', 'administrative_responsible']
+        fields = ['tasks','id','name','description','start','end','technical_responsible', 'administrative_responsible', 'sprints']
         identifier = 'id'
         identifiers = ['pk', 'id']
 
@@ -146,18 +147,24 @@ class ScrumUserSerializer(ModelSerializer):
         identifiers = ['pk', 'id']
 
 
-class SprintSerializer(ModelSerializer):
+class SprintSerializer(BusinessSerializer):
+    project = HyperlinkedRelatedField(view_name='scrum:Project_detail', many=False, read_only=True)
     tasks = HyperlinkedRelatedField(view_name='scrum:Task_detail', many=True, read_only=True)
     impediments = HyperlinkedRelatedField(view_name='scrum:Impediment_detail', many=True, read_only=True)
     responsible = HyperlinkedRelatedField(view_name='scrum:ScrumUser_detail', many=False, read_only=True)
     class Meta:
         model = Sprint
-        fields = ['tasks','impediments','id','name','description','start','end','real_end','responsible']
+        fields = ['tasks','impediments','id','code','start','end','responsible', 'project']
         identifier = 'id'
         identifiers = ['pk', 'id']
 
+    def field_relationship_to_validate_dict(self):
+        a_dict = {}
+        a_dict['responsible_id'] = 'responsible'
+        a_dict['project_id'] = 'project'
+        return a_dict
 
-class TaskSerializer(ModelSerializer):
+class TaskSerializer(BusinessSerializer):
     impediments = HyperlinkedRelatedField(view_name='scrum:Impediment_detail', many=True, read_only=True)
     sprint = HyperlinkedRelatedField(view_name='scrum:Sprint_detail', many=False, read_only=True)
     responsible = HyperlinkedRelatedField(view_name='scrum:ScrumUser_detail', many=False, read_only=True)
@@ -168,5 +175,9 @@ class TaskSerializer(ModelSerializer):
         identifier = 'id'
         identifiers = ['pk', 'id']
 
-
-
+    def field_relationship_to_validate_dict(self):
+        a_dict = {}
+        a_dict['project_id'] = 'project'
+        a_dict['sprint_id'] = 'sprint'
+        a_dict['responsible_id'] = 'responsible'
+        return a_dict

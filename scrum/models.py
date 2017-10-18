@@ -1,4 +1,9 @@
 from __future__ import unicode_literals
+
+import base64
+
+import jwt
+
 from hyper_resource.models import FeatureModel, BusinessModel
 from hyper_resource.models import FeatureModel, BusinessModel
 from hyper_resource.models import FeatureModel, BusinessModel
@@ -8,6 +13,8 @@ from django.db import models
 
 # Create your models here.
 from hyper_resource.models import BusinessModel
+from kanban.settings import SECRET_KEY
+
 
 class ScrumUser(BusinessModel):
     contextclassname = 'user-list'
@@ -18,7 +25,47 @@ class ScrumUser(BusinessModel):
     description = models.TextField(blank=True, null=True, default='')
     role = models.CharField(max_length=100, blank=True, default='user')
     avatar = models.CharField(max_length=200, blank=True, default='')
-    ativo = models.NullBooleanField()
+    active   = models.NullBooleanField()
+
+    @classmethod
+    def jwt_algorithm(cls):
+        return 'HS256'
+
+    @classmethod
+    def getOneOrNone(cls, a_user_name, password):
+        return ScrumUser.objects.filter(user_name=a_user_name, password=password).first()
+
+    def getToken(self):
+        encoded = jwt.encode({'id': self.id, 'user_name': self.user_name, 'avatar': self.avatar}, SECRET_KEY,
+                             algorithm=ScrumUser.jwt_algorithm())
+        return encoded
+
+    @classmethod
+    def login(cls, user_name, password):
+        user = ScrumUser.getOneOrNone(user_name, password)
+        if user is None:
+            return None
+        a_dict = {}
+        a_dict['id'] = user.id
+        a_dict['name'] = user.name
+        a_dict['user_name'] = user.user_name
+        a_dict['avatar'] = user.avatar
+        a_dict['token'] = user_name.getToken()
+        return a_dict
+
+    @classmethod
+    def token_is_ok(cls, a_token):
+        try:
+            payload = jwt.decode(a_token, SECRET_KEY, algorithm=ScrumUser.jwt_algorithm())
+            return True
+        except jwt.InvalidTokenError:
+            return False
+
+    def encodeField(self, a_field):
+        return base64.b64encode(a_field.encode())
+
+    def decodeField(self, a_field):
+        return base64.b64decode(a_field.encode())
 
 class ContinuousActivity(BusinessModel):
     name = models.CharField(max_length=100)
@@ -60,12 +107,13 @@ class Project(BusinessModel):
 class Sprint(BusinessModel):
     contextclassname = 'sprints'
     id = models.AutoField(primary_key=True, db_column='id_sprint')
-    name = models.CharField(max_length=100 )
-    description = models.TextField(blank=True, null=True, default='')
+    code = models.CharField(max_length=100 )
+    #description = models.TextField(blank=True, null=True, default='')
     start = models.DateField(null=True,blank=True)
     end = models.DateField(null=True, blank=True)
-    real_end = models.DateField(null=True, blank=True)
+    #real_end = models.DateField(null=True, blank=True)
     responsible = models.ForeignKey(ScrumUser,  db_column='id_scrumuser',related_name='sprints', blank=True, null=True)
+    project = models.ForeignKey(Project,  db_column='id_project',related_name='sprints', blank=True, null=True)
 
     def __str__(self):
         return self.name or ('Sprint ending %s') % self.end
@@ -115,5 +163,6 @@ class Impediment(BusinessModel):
     created_date = models.DateField(default=datetime.now)
     resolution_date = models.DateField(blank=True)
     task = models.ForeignKey(Task,  db_column='id_task',related_name='impediments' ,blank=True, null=True)
+    sprint = models.ForeignKey(Sprint,  db_column='id_sprint',related_name='impediments' ,blank=True, null=True)
 
 

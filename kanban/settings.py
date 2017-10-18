@@ -77,6 +77,7 @@ CORS_EXPOSE_HEADERS = ['accept',
                        'user-agent',
                        'x-csrftoken',
                        'x-requested-with',
+                       'x-access-token',
                        ]
 TEMPLATES = [
     {

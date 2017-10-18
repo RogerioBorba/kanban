@@ -92,14 +92,49 @@ class ProjectDetail(NonSpatialResource):
 class ScrumUserList(CollectionResource):
     queryset = ScrumUser.objects.all()
     serializer_class = ScrumUserSerializer
-    contextclassname = 'scrum-user-list'
+    contextclassname = 'user-list'
     def initialize_context(self):
         self.context_resource = ScrumUserContext()
         self.context_resource.resource = self
 
+class ScrumUserRegister(CollectionResource):
+    queryset = ScrumUser.objects.all()
+    serializer_class = ScrumUserSerializer
+    contextclassname = 'user-list'
+    def initialize_context(self):
+        self.context_resource = ScrumUserContext()
+        self.context_resource.resource = self
+
+    def post(self, request, *args, **kwargs):
+        #print(request)
+        resp = super(ScrumUserRegister, self).post(request, *args, **kwargs)
+        resp['x-access-token'] = self.object_model.getToken()
+        return resp
+
+class ScrumUserLogin(CollectionResource):
+    queryset = ScrumUser.objects.all()
+    serializer_class = ScrumUserSerializer
+    contextclassname = 'user-list'
+    def initialize_context(self):
+        self.context_resource = ScrumUserContext()
+        self.context_resource.resource = self
+
+    def post(self, request, *args, **kwargs):
+
+        res = ScrumUser.getOneOrNone(request.data['user_name'], request.data['password'])
+
+        if res is None:
+            res = Response(status=status.HTTP_401_UNAUTHORIZED, content_type='application/json')
+            res['WWW-Authenticate'] = 'Bearer'
+            return res
+        response = Response(status=status.HTTP_201_CREATED, content_type='application/json')
+        response['Content-Location'] = request.path + str(res.id) + '/'
+        response['x-access-token'] = res.getToken()
+        return response
+
 class ScrumUserDetail(NonSpatialResource):
     serializer_class = ScrumUserSerializer
-    contextclassname = 'scrum-user-list'
+    contextclassname = 'user-list'
     def initialize_context(self):
         self.context_resource = ScrumUserContext()
         self.context_resource.resource = self

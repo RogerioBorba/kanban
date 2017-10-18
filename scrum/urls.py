@@ -21,10 +21,12 @@ urlpatterns = format_suffix_patterns([
     url(r'^project-list/$', views.ProjectList.as_view(), name='Project_list'),
     url(r'^project-list/(?P<attributes_functions>.*)/?$', views.ProjectList.as_view(), name='Project_list_af'),
 
-    url(r'^scrum-user-list/(?P<pk>[0-9]+)/$', views.ScrumUserDetail.as_view(), name='ScrumUser_detail'),
-    url(r'^scrum-user-list/(?P<pk>[0-9]+)/(?P<attributes_functions>.*)/$', views.ScrumUserDetail.as_view(), name='ScrumUser_detail_af'),
-    url(r'^scrum-user-list/$', views.ScrumUserList.as_view(), name='ScrumUser_list'),
-    url(r'^scrum-user-list/(?P<attributes_functions>.*)/?$', views.ScrumUserList.as_view(), name='ScrumUser_list_af'),
+    url(r'^user-list/(?P<pk>[0-9]+)/$', views.ScrumUserDetail.as_view(), name='ScrumUser_detail'),
+    url(r'^user-list/(?P<pk>[0-9]+)/(?P<attributes_functions>.*)/$', views.ScrumUserDetail.as_view(), name='ScrumUser_detail_af'),
+    url(r'^user-list/register/?$', views.ScrumUserRegister.as_view(), name='Usuario_register'),
+    url(r'^user-list/login/?$', views.ScrumUserLogin.as_view(), name='Usuario_login'),
+    url(r'^user-list/$', views.ScrumUserList.as_view(), name='ScrumUser_list'),
+    url(r'^user-list/(?P<attributes_functions>.*)/?$', views.ScrumUserList.as_view(), name='ScrumUser_list_af'),
 
     url(r'^sprint-list/(?P<pk>[0-9]+)/$', views.SprintDetail.as_view(), name='Sprint_detail'),
     url(r'^sprint-list/(?P<pk>[0-9]+)/(?P<attributes_functions>.*)/$', views.SprintDetail.as_view(), name='Sprint_detail_af'),
@@ -37,6 +39,5 @@ urlpatterns = format_suffix_patterns([
     url(r'^task-list/$', views.TaskList.as_view(), name='Task_list'),
     url(r'^task-list/status-dominio-list/?$', views.TaskListStatus.as_view(), name='Task_list_af'),
     url(r'^task-list/(?P<attributes_functions>.*)/?$', views.TaskList.as_view(), name='Task_list_af'),
-
 
 ])
