@@ -13,7 +13,7 @@ from django.db import models
 
 # Create your models here.
 from hyper_resource.models import BusinessModel
-from kanban.settings import SECRET_KEY
+from hyper_resource.views import SECRET_KEY
 
 
 class ScrumUser(BusinessModel):
@@ -67,20 +67,28 @@ class ScrumUser(BusinessModel):
     def decodeField(self, a_field):
         return base64.b64decode(a_field.encode())
 
-class ContinuousActivity(BusinessModel):
+class TypeContinuousActivity(BusinessModel):
     name = models.CharField(max_length=100)
-    description = models.TextField(blank=True, null=True, default='')
     type = models.IntegerField(blank=True, null=True, default='')
-    responsible = models.ForeignKey(ScrumUser,  db_column='id_scrumuser',related_name='continuous_activities', blank=True, null=True)
-    started = models.DateField(null=True,blank=True)
-    ended = models.DateField(null=True,blank=True)
+
     TYPE_COMMITTEE = 1
     TYPE_MEETING = 2
     TYPE_COLLABORATIVE_WORK = 3
+    TYPE_WORKSHOP = 4
+    TYPE_CONGRESS_SYMPOSIUM_COLLOQUIUM = 5
+    TYPE_EVENT = 6
+    TYPE_ABSENCE_FROM_WORK = 7
+    TYPE_OTHER = 8
+
     TYPE_CHOICES = (
         (TYPE_COMMITTEE, ('Comitê')),
         (TYPE_MEETING, ('Reunião')),
         (TYPE_COLLABORATIVE_WORK, ('Trabalho colaborativo')),
+        (TYPE_WORKSHOP, ('Workshop/Treinamento')),
+        (TYPE_CONGRESS_SYMPOSIUM_COLLOQUIUM, ('Congresso/Simpósio/Colóquio')),
+        (TYPE_EVENT, ('Evento')),
+        (TYPE_ABSENCE_FROM_WORK, ('Ausência')),
+        (TYPE_OTHER, ('Outros')),
     )
 
     @classmethod
@@ -93,6 +101,16 @@ class ContinuousActivity(BusinessModel):
             dic_values.append(dicti)
         return dic_values
 
+
+class ContinuousActivity(BusinessModel):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True, default='')
+    responsible = models.ForeignKey(ScrumUser,  db_column='id_scrumuser',related_name='continuous_activities', blank=True, null=True)
+    started = models.DateField(null=True,blank=True)
+    ended = models.DateField(null=True,blank=True)
+    typeContinuousActivity = models.ForeignKey(ScrumUser,  db_column='id_typeContinuousActivity', blank=True, null=True)
+
+
 class Project(BusinessModel):
     name = models.CharField(max_length=100 )
     description = models.TextField(blank=True, null=True, default='')
@@ -103,6 +121,8 @@ class Project(BusinessModel):
     technical_responsible = models.ForeignKey(ScrumUser,  db_column='id_scrumuser_technical',related_name='projects', blank=True, null=True)
     administrative_responsible = models.ForeignKey(ScrumUser,  db_column='id_scrumuser_administrative', blank=True, null=True)
 
+    def to_string(self):
+        return self.name
 
 class Sprint(BusinessModel):
     contextclassname = 'sprints'
@@ -116,7 +136,8 @@ class Sprint(BusinessModel):
     project = models.ForeignKey(Project,  db_column='id_project',related_name='sprints', blank=True, null=True)
 
     def __str__(self):
-        return self.name or ('Sprint ending %s') % self.end
+        return self.code or ('Sprint ending %s') % self.end
+
 
 class Task(BusinessModel):
     contextclassname = 'tasks'
@@ -127,7 +148,7 @@ class Task(BusinessModel):
     STATUS_DONE = 4
     STATUS_CHOICES = (
         (STATUS_TODO, ('A fazer')),
-        (STATUS_IN_PROGRESS, ('Em Progresso')),
+        (STATUS_IN_PROGRESS, ('Fazendo')),
         (STATUS_IN_PENDING, ('Pendente')),
         (STATUS_DONE, ('Feito')),
     )
@@ -155,6 +176,8 @@ class Task(BusinessModel):
             dic_values.append(dicti)
 
         return dic_values
+    def to_string(self):
+        return self.name
 
 class Impediment(BusinessModel):
     contextclassname = 'impediments'
@@ -164,5 +187,8 @@ class Impediment(BusinessModel):
     resolution_date = models.DateField(blank=True)
     task = models.ForeignKey(Task,  db_column='id_task',related_name='impediments' ,blank=True, null=True)
     sprint = models.ForeignKey(Sprint,  db_column='id_sprint',related_name='impediments' ,blank=True, null=True)
+
+    def to_string(self):
+        return self.name
 
 

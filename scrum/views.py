@@ -14,6 +14,7 @@ def get_root_response(request):
     format = None
     root_links = {
 
+      'type-continuous-activity-list': reverse('scrum:TypeContinuousActivity_list' , request=request, format=format),
       'continuous-activity-list': reverse('scrum:ContinuousActivity_list' , request=request, format=format),
       'impediment-list': reverse('scrum:Impediment_list' , request=request, format=format),
       'project-list': reverse('scrum:Project_list' , request=request, format=format),
@@ -44,10 +45,32 @@ class APIRoot(APIView):
         response = Response(root_links)
         return self.base_context.addContext(request, response)
 
+class TypeContinuousActivityList(CollectionResource):
+    queryset = TypeContinuousActivity.objects.all()
+    serializer_class = TypeContinuousActivitySerializer
+    contextclassname = 'type-continuous-activity-list'
+    def token_is_need(self):
+        return True
+    def initialize_context(self):
+        self.context_resource = TypeContinuousActivityContext()
+        self.context_resource.resource = self
+
+class TypeContinuousActivityDetail(NonSpatialResource):
+    serializer_class = TypeContinuousActivitySerializer
+    contextclassname = 'type-continuous-activity-list'
+    def token_is_need(self):
+        return True
+    def initialize_context(self):
+        self.context_resource = TypeContinuousActivityContext()
+        self.context_resource.resource = self
+
+
 class ContinuousActivityList(CollectionResource):
     queryset = ContinuousActivity.objects.all()
     serializer_class = ContinuousActivitySerializer
     contextclassname = 'continuous-activity-list'
+    def token_is_need(self):
+        return True
     def initialize_context(self):
         self.context_resource = ContinuousActivityContext()
         self.context_resource.resource = self
@@ -55,6 +78,8 @@ class ContinuousActivityList(CollectionResource):
 class ContinuousActivityDetail(NonSpatialResource):
     serializer_class = ContinuousActivitySerializer
     contextclassname = 'continuous-activity-list'
+    def token_is_need(self):
+        return True
     def initialize_context(self):
         self.context_resource = ContinuousActivityContext()
         self.context_resource.resource = self
@@ -63,6 +88,8 @@ class ImpedimentList(CollectionResource):
     queryset = Impediment.objects.all()
     serializer_class = ImpedimentSerializer
     contextclassname = 'impediment-list'
+    def token_is_need(self):
+        return True
     def initialize_context(self):
         self.context_resource = ImpedimentContext()
         self.context_resource.resource = self
@@ -78,6 +105,8 @@ class ProjectList(CollectionResource):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     contextclassname = 'project-list'
+    def token_is_need(self):
+        return True
     def initialize_context(self):
         self.context_resource = ProjectContext()
         self.context_resource.resource = self
@@ -85,6 +114,8 @@ class ProjectList(CollectionResource):
 class ProjectDetail(NonSpatialResource):
     serializer_class = ProjectSerializer
     contextclassname = 'project-list'
+    def token_is_need(self):
+        return True
     def initialize_context(self):
         self.context_resource = ProjectContext()
         self.context_resource.resource = self
@@ -93,6 +124,8 @@ class ScrumUserList(CollectionResource):
     queryset = ScrumUser.objects.all()
     serializer_class = ScrumUserSerializer
     contextclassname = 'user-list'
+    def token_is_need(self):
+        return True
     def initialize_context(self):
         self.context_resource = ScrumUserContext()
         self.context_resource.resource = self
@@ -135,6 +168,8 @@ class ScrumUserLogin(CollectionResource):
 class ScrumUserDetail(NonSpatialResource):
     serializer_class = ScrumUserSerializer
     contextclassname = 'user-list'
+    def token_is_need(self):
+        return True
     def initialize_context(self):
         self.context_resource = ScrumUserContext()
         self.context_resource.resource = self
@@ -143,6 +178,8 @@ class SprintList(CollectionResource):
     queryset = Sprint.objects.all()
     serializer_class = SprintSerializer
     contextclassname = 'sprint-list'
+    def token_is_need(self):
+        return True
     def initialize_context(self):
         self.context_resource = SprintContext()
         self.context_resource.resource = self
@@ -150,6 +187,8 @@ class SprintList(CollectionResource):
 class SprintDetail(NonSpatialResource):
     serializer_class = SprintSerializer
     contextclassname = 'sprint-list'
+    def token_is_need(self):
+        return True
     def initialize_context(self):
         self.context_resource = SprintContext()
         self.context_resource.resource = self
@@ -158,6 +197,8 @@ class TaskList(CollectionResource):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
     contextclassname = 'task-list'
+    def token_is_need(self):
+        return True
     def initialize_context(self):
         self.context_resource = TaskContext()
         self.context_resource.resource = self
@@ -166,6 +207,8 @@ class TaskListStatus(CollectionResource):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
     contextclassname = 'task-list'
+    def token_is_need(self):
+        return True
     def initialize_context(self):
         self.context_resource = TaskContext()
         self.context_resource.resource = self
@@ -177,18 +220,22 @@ class TaskListStatus(CollectionResource):
 class TaskDetail(NonSpatialResource):
     serializer_class = TaskSerializer
     contextclassname = 'task-list'
+    def token_is_need(self):
+        return True
     def initialize_context(self):
         self.context_resource = TaskContext()
         self.context_resource.resource = self
 
-class ContinuousActivityTypeList(CollectionResource):
-    queryset = ContinuousActivity.objects.all()
-    serializer_class = ContinuousActivitySerializer
-    contextclassname = 'continuous-activity-list'
+class TypeContinuousActivityTypeList(CollectionResource):
+    queryset = TypeContinuousActivity.objects.all()
+    serializer_class = TypeContinuousActivitySerializer
+    contextclassname = 'type-continuous-activity-list'
+    def token_is_need(self):
+        return True
     def initialize_context(self):
-        self.context_resource = ContinuousActivityContext()
+        self.context_resource = TypeContinuousActivityContext()
         self.context_resource.resource = self
 
     def get(self, request, *args, **kwargs):
-       a_data = ContinuousActivity.type_dic()
+       a_data = TypeContinuousActivity.type_dic()
        return Response(data=a_data, content_type='application/json')

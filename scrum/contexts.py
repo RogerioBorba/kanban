@@ -1,4 +1,10 @@
 from hyper_resource.contexts import FeatureContext, FeatureCollectionContext
+
+class TypeContinuousActivityContext(FeatureContext):
+    pass
+class TypeContinuousActivityCollectionContext(FeatureCollectionContext):
+    pass
+
 class ContinuousActivityContext(FeatureContext):
     pass
 class ContinuousActivityCollectionContext(FeatureCollectionContext):

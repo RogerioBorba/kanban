@@ -24,7 +24,7 @@ from abc import ABCMeta, abstractmethod
 
 
 from hyper_resource.models import  FactoryComplexQuery, OperationController, BusinessModel, ConverterType
-from kanban.settings import TOKEN_NEED, SECRET_KEY
+SECRET_KEY = '-&t&pd%%((qdof5m#=cp-=-3q+_+pjmu(ru_b%e+6u#ft!yb$$'
 
 
 class IgnoreClientContentNegotiation(BaseContentNegotiation):
@@ -110,7 +110,7 @@ class BaseContext(object):
         except:
             return ""
         serializer = None #ContextSerializer(classobject)
-        contextdata = serializer.data
+        contextdata = {} #serializer.data
         hydradata = self.getHydraData(request)
         if "@context" in hydradata:
             hydradata["@context"].update(contextdata["@context"])
@@ -149,6 +149,14 @@ class AbstractResource(APIView):
     def token_is_need(self):
         return  False
 
+    def add_url_in_header(self, url, response, rel):
+        link = ' <'+url+'>; rel=\"'+rel+'\" '
+        if "Link" not in response:
+            response['Link'] = link
+        else:
+            response['Link'] += "," + link
+        return response
+
     def dispatch(self, request, *args, **kwargs):
         if self.token_is_need():
             http_auth = 'HTTP_AUTHORIZATION'
@@ -156,13 +164,20 @@ class AbstractResource(APIView):
                 a_token = request.META['HTTP_AUTHORIZATION'][7:].strip()
                 if self.token_is_ok(a_token):
                     return super(AbstractResource, self).dispatch(request, *args, **kwargs)
-            return HttpResponse(json.dumps({"token": "token is needed or it is not ok"}), status=401,  content_type='application/json')
+            resp =  HttpResponse(json.dumps({"token": "token is needed or it is not ok"}), status=401,  content_type='application/json')
+            resp['WWW-Authenticate'] = 'Bearer realm="example"'
+            return resp
         else:
            return  super(AbstractResource, self).dispatch(request, *args, **kwargs)
 
-    @abstractmethod #Must be override
+    #@abstractmethod #Could be override
     def initialize_context(self):
-       pass
+        context_module_name = self.__class__.__module__.split('.')[0] + '.contexts'
+        context_module = importlib.import_module(context_module_name)
+        context_class_name = self.__class__.__name__ + 'Context'
+        context_class = getattr(context_module, context_class_name )
+        self.context_resource = context_class()
+        self.context_resource.resource = self
 
     # todo
     def path_request_is_ok(self, a_path):
@@ -250,6 +265,14 @@ class AbstractResource(APIView):
         obj = get_object_or_404(queryset, **dicti)
         #self.check_object_permissions(self.request, obj)
         return obj
+
+    def patch(self, request, *args, **kwargs):
+        return super(AbstractResource, self).patch(request, *args, **kwargs)
+
+    def head(self, request, *args, **kwargs):
+        resp =  Response(status=status.HTTP_200_OK)
+        return resp
+
 
     def put(self, request, *args, **kwargs):
         obj = self.get_object(kwargs)
@@ -772,7 +795,8 @@ class FeatureResource(SpatialResource):
 
         if status in [500]:
            return Response({'Error ': 'The server can not process this request. Status:' + str(status)}, status=status)
-
+        if 'HTTP_ACCEPT'  not in request.META:
+            request.META['HTTP_ACCEPT'] = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
         accept = request.META['HTTP_ACCEPT']
         if accept.lower() == "image/png" or kwargs.get('format', None) == 'png':
             if len(dict_for_response) == 3:
@@ -879,7 +903,7 @@ class AbstractCollectionResource(AbstractResource):
 
     def basic_post(self, request):
         response =  Response(status=status.HTTP_201_CREATED, content_type='application/json')
-        response['Content-Location'] = request.path + str(self.object_model.id)
+        response['Content-Location'] = request.path + str(self.object_model.pk)
         return response
 
     def post(self, request, *args, **kwargs):

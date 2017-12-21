@@ -4,11 +4,17 @@ from scrum import views
 
 urlpatterns = format_suffix_patterns([
     url(r'^$', views.APIRoot.as_view(), name='api_root'),
-    url(r'^continuous-activity-list/type-dominio-list/(?P<pk>[0-9]+)/?$', views.ContinuousActivityTypeList.as_view(), name='Task_list_af'),
+    url(r'^type-continuous-activity-list/type-dominio-list/?$', views.TypeContinuousActivityTypeList.as_view(), name='TypeContinuousActivity_list'),
+    url(r'^type-continuous-activity-list/(?P<pk>[0-9]+)/$', views.TypeContinuousActivityDetail.as_view(), name='TypeContinuousActivity_detail'),
+    url(r'^type-continuous-activity-list/(?P<pk>[0-9]+)/(?P<attributes_functions>.*)/$', views.TypeContinuousActivityDetail.as_view(), name='TypeContinuousActivity_detail_af'),
+    url(r'^type-continuous-activity-list/$', views.TypeContinuousActivityList.as_view(), name='TypeContinuousActivity_list'),
+    url(r'^type-continuous-activity-list/(?P<attributes_functions>.*)/?$', views.TypeContinuousActivityList.as_view(), name='TypeContinuousActivity_list_af'),
+
+    #url(r'^continuous-activity-list/type-dominio-list/(?P<pk>[0-9]+)/?$', views.ContinuousActivityTypeList.as_view(), name='Task_list_af'),
     url(r'^continuous-activity-list/(?P<pk>[0-9]+)/$', views.ContinuousActivityDetail.as_view(), name='ContinuousActivity_detail'),
     url(r'^continuous-activity-list/(?P<pk>[0-9]+)/(?P<attributes_functions>.*)/$', views.ContinuousActivityDetail.as_view(), name='ContinuousActivity_detail_af'),
     url(r'^continuous-activity-list/$', views.ContinuousActivityList.as_view(), name='ContinuousActivity_list'),
-    url(r'^continuous-activity-list/type-dominio-list/?$', views.ContinuousActivityTypeList.as_view(), name='ContinuousActivity_list'),
+    #url(r'^continuous-activity-list/type-dominio-list/?$', views.ContinuousActivityTypeList.as_view(), name='ContinuousActivity_list'),
     url(r'^continuous-activity-list/(?P<attributes_functions>.*)/?$', views.ContinuousActivityList.as_view(), name='ContinuousActivity_list_af'),
 
     url(r'^impediment-list/(?P<pk>[0-9]+)/$', views.ImpedimentDetail.as_view(), name='Impediment_detail'),
