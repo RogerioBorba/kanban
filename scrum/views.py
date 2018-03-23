@@ -141,7 +141,8 @@ class ScrumUserRegister(CollectionResource):
     def post(self, request, *args, **kwargs):
         #print(request)
         resp = super(ScrumUserRegister, self).post(request, *args, **kwargs)
-        resp['x-access-token'] = self.object_model.getToken()
+        if resp.status_code != 400:
+            resp['x-access-token'] = self.object_model.getToken()
         return resp
 
 class ScrumUserLogin(CollectionResource):

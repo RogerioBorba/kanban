@@ -1,0 +1,100 @@
+id_task	name	description	status	order	started	due	completed	id_project	id_scrumuser	id_sprint
+1	Camadas de Interseção e de Diferença	Passar para Jéssica algumas atividades no QGIS, como a camada de interseção e diferença entre camadas de vias e eixos de logradouro do município de Goianira.	4		2018-01-26	2018-01-26		1	7	
+3	Desenvolver app Hyper Visualizer		2		2018-01-31			2	6	
+4	Criação do frontend do sig administrativo versão 0.1a	Consiste em criar a primeira versão 0.1 da parte visual do sig adm com funcionalidades básicas CRUD	4		2018-01-10	2018-01-12			6	
+5	Criação do frontend da aplicação adesão	CRUD	4		2017-10-10	2017-10-17			6	
+7	Criar curso de python com gis		1		2018-01-01	2018-01-31			8	
+8	Atualizar documento para capacitação da INDE		4		2017-12-20	2017-12-20			8	
+9	Backup de scripts	Backup de scripts de tabelas e views do banco de dados "gis", do servidor "postgis-osm-2017-06-30" do PostgreSQL, com a finalidade de recuperação dos dados em caso de perda.	4		2018-02-05	2018-02-05		1	7	
+10	Criar paper para Autocarto 2018	Criar paper de 1500 palavras para Autocarto 2018  correspondente a versão inicial. Após a data fechar o paper na versão	4		2018-02-06	2018-02-15			8	
+11	Estudo de SGBD (Introdução a BD)	Introdução ao conteúdo teórico de SGBD	4		2018-02-05	2018-02-15		8	9	
+12	Criar operação count nas classes de coleção do Hyper-resource	consiste em mostrar quantos elementos uma coleção tem	4		2018-02-06	2018-02-07		9	5	
+13	Alterar as classes de contexto para a a operação count das classes de coleção de maneira genérica	Alterar as classes de contexto para a a operação count das classes de coleção de maneira genérica	4		2018-02-08	2018-02-08		9	5	
+14	Criação de um método/atributo chamado representation_name  na classe ou subaclasse de ContextResource que aponta para um atributo que descreve o recurso como um todo	Retorna a descrição da representação de um recurso através de um atributo do recurso	4		2018-02-15	2018-02-16		9	5	
+15	Revisão e atualização do EGTI	Revisão e atualização do EGTI para a DGC	2		2018-02-02	2018-02-22			8	
+16	Interseção entre vias de Goianira	Ajuste no projeto de interseção de dados da base de dados do OSM e a base de dados da Quadra Fase, especificamente as vias da cidade de Goianira, no aplicativo QGIS. Visualmente a interseção está em desacordo.	4		2018-02-06	2018-03-16		1	7	
+17	Edição de informações do usuário logado	Permitir o a atualização do profile do usuário logado	4		2018-02-07	2018-02-07		5	6	
+18	Inclusão de sprint na tarefa	Poder escolher no cadastramento da tarefa o sprint  desejado. Caso seja escolhido um sprint a data de início e fim da tarefa precisa estar contida  no início e fim do sprint	1		2018-02-20	2018-02-20		5	6	
+19	Criação da operação offset_limit para classe AbstractCollectionResource	Este método permitirá o controle da quantidade de elementos que uma coleção de recurso retorna. Offset é o deslocamento e o limit a quantidade a partir do offset	4		2018-02-07	2018-02-07		9	5	
+20	Alteração da operação count nas classes de coleção do Hyper-resource	consiste em mostrar quantos elementos uma coleção tem	4		2018-02-07	2018-02-07			8	
+21	Inclusão do mapnik no hyper-resource para geraração de imagens - básico	Inclusão do mapnik para gerar imagens a partir de vetores	4		2018-01-09	2018-02-12			8	
+22	Relatório de Mapeamento Colaborativo	Desenvolvimento de um relatório sobre todo o meu aprendizado na atividade específica de mapeamento colaborativo.	2		2018-02-07			1	7	
+23	Servir container python-osm-2017-06-30 via Nginx	Consiste na criação de um arquivo de configuração .conf  do Nginx para servir, via proxy reverso, o container Docker que armazena o projeto OpenStreetMap	4		2018-02-07	2018-02-07		7	5	
+24	Alteração de scripts para geração de código do Hyper Resource	Consiste em manutenção nos  scripts para a geração automática de código de Web Apis sem a necessidade de alteração posterior no código	4		2018-01-19	2018-01-31		9	5	
+25	Configuração de script para inclusão no Nginx da api munic-2015	Consiste em alterar o ambiente do servidor http nginx para acomodar como proxy reverso a api muni-2015	4		2018-01-01	2018-01-19			5	
+26	Gerar container do aplicativo adesão da INDE	Consiste na criação de um container Docker para o projeto de controle de adesao da INDE	4		2017-12-13	2017-12-13		10	8	
+27	Refatoração dos arquivos de configuração do Nginx	Consiste na refatoração dos arquivos de configuração do Nginx para que cada projeto servido por ele tenha seu próprio arquivo .conf	4		2018-01-19	2018-01-19			5	
+28	função groupby	Permitir o uso de groupby no hyperresource	4		2018-02-19	2018-02-19		9	8	
+29	função groupbycount	Permitir o uso de groupbycount no hyperresource	4		2018-02-19	2018-02-19		9	8	
+30	criação da função offsetLimit	A função offsetLimit permite que o usuário coloque um limite de elementos que devem ser carregados a partir de um deslocamento offset	4		2018-02-19	2018-02-19		9	8	
+31	função distinct	permite ao usuário criar filtrar por  distinct  elementos do hyperresource	4		2018-02-19	2018-02-19		9	8	
+32	Atualização do método Options	Atualização do método Options para contemplar novas funcionalidades de agregação do kanban	2		2018-02-19	2018-02-19		9	8	
+34	Exercícios de introdução ao Modelo Relacional	Colocando em teste os conhecimentos adquiridos no capitulo em questão.	4		2018-02-21	2018-02-23		8	9	
+35	Introdução para SQL	Leitura do capitulo de introdução para SQL	4		2018-02-23	2018-03-12		8	9	
+36	Generator File	ajustar para funcionar com python 2 e 3	4		2018-02-21	2018-02-21		9	5	
+37	Generator seriarializer e Viewer	Ajustart para gerar herança de acordo com a classe de negócio. atualmente está gerando tudo como BusinessSerializer e  NonSpatialResource  Collection. Depende do caso. Pode ser: GeoBusinessSerializer , FeatureResource  eFeatureCollectionResource	4		2018-02-21	2018-02-21		9	5	
+39	Image generator	Remover a linha, from hyper_resource_py import settings, do arquivo img_generator.py. Está dando erro	4		2018-02-21	2018-02-21		9	5	
+40	Exercícios de Introdução para SQL	Exercícios para colocar em teste o conhecimento adquirido na leitura do texto	2		2018-03-12			8	9	
+41	Trocar undescore por hifen na geração de código de urls.py.	Nome da aplicação sempre quando tem undescore	4		2018-02-21	2018-02-21		9	5	
+42	Revisão e atualização da documentação da capacitação da INDE	Gerar material atualizado para dar o curso nas modalidades EAD e presencial	2		2018-02-14	2018-03-07			8	
+43	Homologação do VINDE	Homologar a nova versão do VINDE para  entrar em produção	2		2018-02-15	2018-02-16			8	
+44	Homologação do geoserver	Homologação  da nova versão do  geoserver  que deverá ser realizada em conjunto com as coordenações	2		2018-02-20	2018-02-27			8	
+45	Paleta de cores para as camadas no hyper_visualizer para o leaflet	Poder torcar a cor de uma camada no hyper_visualizer	4		2018-02-21	2018-02-23		2	8	
+46	SQL Intermediário	Leitura sobre SQL nível intermediário.	3					8	9	
+47	Exercícios de SQL Intermediário	Exercícios para teste de capacitação do SQL nível Intermediário	3					8	9	
+48	Leitura de SQL Avançado	SQL Avançado (Acessando SQL a partir de uma linguagem de programação, Funções e Procedimentos, Gatilhos, Consultas Recursivas, Recursos avançados de agregação, OLAP)	3					8	9	
+49	Exercícios de SQL Avançado	Exercícios para teste de capacidade sobre SQL Avançado	3					8	9	
+50	Exercícios de Introdução SGBD	exercícios para teste de capacidade referente a Introdução ao conteúdo teórico de SGBD	4		2018-02-16	2018-02-20		8	9	
+51	Introdução ao Modelo Relacional de Banco de Dados	Leitura de introdução ao Modelo Relacional	4		2018-02-20	2018-02-21		8	9	
+52	Migrar shps para o postgis	Migração de alguns shps para o postgis	4		2018-02-22	2018-02-22		7	8	
+53	Migração dos dados atuais de vias e eixos de logradouro	Migração dos dados de vias e eixos de logradouro da versão de 2018 para o banco de dados PostgreSQL.	4		2018-02-22	2018-02-22		1	7	
+54	Atualização das tabelas de eixos de logradouro e vias	Atualização das tabelas de eixos de logradouro e vias com a carga de dados de uma pesquisa de censo mais recente.	4		2018-02-22	2018-03-02		1	7	
+55	EAD para INDE	Elaboração de material para  curso de INDE via EAD	2		2018-02-26	2018-06-06			8	
+56	Refatorar OperationController		1		2018-02-26	2018-02-28		9	8	
+57	Criação da operação 'collect' no Hyper Resource	Consiste na criação da operação 'collect' que tem o objetivo de aplicar uma determinada operação a um determinado atributo de cada uma dos objetos de uma lista de recursos	4		2018-02-28	2018-03-02		9	5	
+58	Refatoração do código	Refatorar o código do vizualizer(Leaflet)	4		2018-03-01	2018-03-01		2	6	
+59	Adicionar Paleta de Cores ao Visualizer	Adicionar Paleta de cores para mudar estilo das camadas.	4		2018-03-02	2018-03-02		2	6	
+60	Ajuste do contexto para operações que retornam geometria	Ajustar do contexto para operações que retornam geometria, pois não estão retornando as operações suportadas	4		2018-03-02	2018-03-06		9	5	
+61	Filtrar camadas através da resposta do método HTTP options		1		2018-03-05	2018-03-06		2	6	
+62	Restauração de campos de tabelas	Processo de restauração de campos, antes removidos, das tabelas "t_st_eixo_logr2018" e "t_st_vias2018", necessário para os web services.	4		2018-03-02	2018-03-02		1	7	
+63	Ajuste do Options para collections	Ajustar do Options das collections	4		2018-03-05	2018-03-08		9	5	
+64	Definição de interfaces para classes de abstractcollection e suas sublasses além de FeatureResource	Definir  interfaces para classes de abstractcollection e suas sublcasses além de FeatureResource	2		2018-03-05	2018-03-09		9	5	
+65	Inclusão de geoserver para as coordenações	Inclusão de geoserver por coordenação atrás do nginx  em containers	1		2018-03-05	2018-03-09			5	
+66	Padronizar  estilos para Geoserver,  openlayers e leaflet	Padronizar  estilos para Geoserver e para Leaflet	1		2018-03-05	2018-04-30		11	6	
+67	Gestão e acompanhamento do projeto do novo sistema gerenciador do DBDG da INDE	Projeto que consiste em criar uma ambiente único para o nó central da inde e interfaces mais amigáveis para a gestão do DBDG	2		2018-03-05	2019-12-31		12	8	
+68	Criação de containers de Geoserver para as coordenações  - versão desenvolvimento	Criação de containers de Geoserver para as coordenações levando em consideração uima interface única de acesso	4		2018-03-06	2018-03-06		11	8	
+69	Configuração de containers de geoserver de desenvolvimento por coordenação	Configuração de containers de geoserver de desenvolvimento por coordenação apontando para suas respectivas bases de dados	2		2018-03-06	2018-03-09		11	8	
+70	Geração e configuração  de dockefile de geoserver de desenvolvimento para as coordenações	Geração e configuração  de dockefile de geoserver de desenvolvimento para as coordenações	4		2018-03-06	2018-03-06		11	8	
+71	Atualização da página da CONCAR	Acomnpanhar e verificar junto ao CDDI  a atualização da página da CONCAR	2		2018-03-07	2018-03-31		12	8	
+72	Acompanhamento e gestão do projeto de ambiente único do DBDG junto ao pessoal da DI	Consiste na gestão e acompanhamento do desenvolvimento do projeto de ambiente único do DBDG junto ao pessoal da DI			2018-03-07	2018-06-30			8	
+73	Reunião GGIBPM	Conclusão da elaboração do Manual e Matriz GGIBPM	1		2018-03-15	2018-03-15		13	10	
+74	Capacitação da INDE para a Secretaria de Planejamento do Estado de Sergipe	Ministrar curso Geoserviços	1		2018-03-20	2018-03-23			10	
+75	XVII Encontro de Informática - Salvador	Participação no evento	4		2017-08-21	2017-08-24			10	
+76	Reunião na DI -  Modernização do Parque Tecnológico dos Complexos do Rio de Janeiro	Orientações para a Modernização do Parque Tecnológico dos Complexos do Rio de Janeiro	4		2017-03-23	2017-03-23		14	10	
+77	Modernização do Parque Tecnológico dos Complexos do Rio de Janeiro	Recebimento/Distribuição de equipamentos no processo de Modernização do Parque Tecnológico dos Complexos do Rio de Janeiro	4		2017-03-27	2017-08-18		14	10	
+78	Participação no estudo e elaboração de projeto de Sistema de Informações Geográficas Administrativos da DGC (SIG-ADM)	Participação no estudo e elaboração do projeto	2		2018-01-01	2018-03-07		6		
+79	Participação no estudo e elaboração de projeto de Sistema de Informações Geográficas Administrativos da DGC (SIG-ADM)	Participação no estudo e elaboração de projeto	2		2018-01-02	2018-03-07		6	10	
+80	Revisão Material para ministrar curso Geoserviços	Capacitação da INDE para a Secretaria de Planejamento do Estado de Sergipe	2		2018-03-07				10	
+81	geoserviços baseados em rest por coordenação	Disponibilização de geoserviços baseados em rest por coordenação	2		2018-03-07	2018-04-30		11	8	
+82	Criação de rotina de verificação do DBDG	Criação de rotina de verificação do DBDG	1		2018-03-07	2018-03-31		12	8	
+83	Participação na Apresentação - Projeto Integração de dados da DGC - situação em 2017/2018	Participação	4		2018-03-08	2018-03-08			10	
+84	Criação do backend para o controle de adesão	Criação do backend para o controle de adesão	4		2017-11-01	2018-03-29		10	8	
+85	Criação do frontend do controle de adesão	Criação do frontend do controle de adesão	4		2017-11-01	2017-12-31		10	6	
+86	Modificação no Hyper Resource para que aceite urls com final sem '/*'	Alteração da função AbstractResource >> attribute_functions_str_with_url_splitted_by_slash() para que aceite urls com final sem '/*'	4		2018-03-12	2018-03-12		9	5	
+87	Modificação do Hyper Resource para compatibilização com Django 2.0	Consiste na modificação do Hyper Resource para que funcione com a nova versão do Django (Isto inclui modificação nos geradores de código, e eventuais códigos depreciados)	4		2018-03-13	2018-03-13			5	
+88	Implementação de BD IBGE estatistica	criando banco de dados e alimentando o mesmo com dados baixados do IBGE estatisticas			2018-03-13				9	
+89	Alimentar banco de dados Estatísticas para pratica de conhecimento adquirido	Aprendendo novas maneiras de implementar o banco de dados de maneira mais eficiente, como importação de arquivos.	4		2018-03-13	2018-03-16		8	9	
+90	Criação de portal GGT	Criar portal GGT para exibir todos as aplicações que estão sendo desenvolvidas para acesso via portal de entrada tanto para backend quanto frontend.	1		2018-03-14	2018-03-28			6	
+91	Avaliação do Tilemill  para a geração de estilos		2		2018-03-14	2018-03-20		11	8	
+92	Treinamento básico em geoserver	Treinamento básico em geoserver	4		2018-03-15	2018-03-15			8	
+93	Verificação de workstation	Verificação de workstation que está apresentando problemas técnicos	4		2018-03-15	2018-03-15			8	
+94	Alteração no Hyper Resource para que retorne o cabaçalho 'access-control-allow-origin'	Alteração no Hyper Resource para que as requisições retornem o cabaçalho 'access-control-allow-origin' em todas as requisições GET e OPTIONS	4		2018-03-15	2018-03-15		9	5	
+95	Modificação do Hyper Resource para que retorne GeoJson no caso de requisições para atributos geométricos	Modificação do método FeatureCollectionResource >> get_objects_serialized_by_only_attributes() para que retorne GeoJson no caso de requisições para atributos geométricos	4		2018-03-14	2018-03-14		9	5	
+97	Reunião sobre mudança				2018-03-15	2018-03-15			8	
+98	Inclusão no header  um tipo de mídia application/vnd.collection+json para classes de coleção	Inclusão no header  um tipo de mídia application/vnd.collection+json para classes de coleção	1		2018-03-20	2018-03-23		3	5	
+99	Inlcusão no método options o @id de acordo com o tipo do recurso	Incluir no método options o @id de acordo com o tipo do recurso. Se for FeatureCollection ou Feature ou Geometry etc	1		2018-03-20	2018-03-23			5	
+100	Generalizando views	Generalização das views de eixos de logradouro para que atendam a todas as outras cidades além de Goianira.	2		2018-03-20			1	7	
+101	Passar funcionalidades feitas no Leaflet para o Openlayers	Passar funcionalidades feitas no Leaflet para o Openlayers	4		2018-03-16	2018-03-20		2	6	
+102	Correção do Hyper Resource para requisição de imagem para coleção de unidades federativas	Correção do Hyper Resource para requisição de imagem para coleção de unidades federativas (atualmente esta sendo retornado um erro)	4		2018-03-21	2018-03-23		9	5	
+103	Ajuste da BCIM com hiper serviço		4		2018-03-21	2018-03-21		3	8	
+104	Ajuste do método Head para retornar o  mesmo conteúdo do headers do método Get	Ajustar o método Head para retornar o  mesmo conteúdo do headers do método Get	1		2018-03-26	2018-03-27		3	5	

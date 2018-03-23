@@ -123,7 +123,7 @@ class ScrumUserSerializer(ModelSerializer):
     tasks = HyperlinkedRelatedField(view_name='scrum:Task_detail', many=True, read_only=True)
     class Meta:
         model = ScrumUser
-        fields = ['continuous_activities','sprints','tasks','id','name','user_name','email', 'description','role']
+        fields = ['continuous_activities','sprints','tasks','id','name','user_name','email', 'description','role', 'password']
         identifier = 'id'
         identifiers = ['pk', 'id']
 
@@ -150,11 +150,13 @@ class TaskSerializer(BusinessSerializer):
     sprint = HyperlinkedRelatedField(view_name='scrum:Sprint_detail', many=False, read_only=True)
     responsible = HyperlinkedRelatedField(view_name='scrum:ScrumUser_detail', many=False, read_only=True)
     project = HyperlinkedRelatedField(view_name='scrum:Project_detail', many=False, read_only=True)
+    typeContinuousActivity = HyperlinkedRelatedField(view_name='scrum:TypeContinuousActivity_detail', many=False,
+                                                     read_only=True)
     to_string = serializers.SerializerMethodField()
 
     class Meta:
         model = Task
-        fields = ['to_string',  'impediments','id','name','description','status','order','started','due','completed','sprint','responsible','project']
+        fields = ['to_string',  'impediments','id','name','description','status','order','started','due','completed','sprint','responsible','typeContinuousActivity','project']
         identifier = 'id'
         identifiers = ['pk', 'id']
 
@@ -163,6 +165,7 @@ class TaskSerializer(BusinessSerializer):
         a_dict['project_id'] = 'project' #task.project.id = project
         a_dict['sprint_id'] = 'sprint'
         a_dict['responsible_id'] = 'responsible'
+        a_dict['typeContinuousActivity_id'] = 'typeContinuousActivity'
         return a_dict
 
     def to_string(self, obj):

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
 import base64
@@ -19,7 +20,7 @@ from hyper_resource.views import SECRET_KEY
 class ScrumUser(BusinessModel):
     contextclassname = 'user-list'
     name = models.CharField(max_length=100, blank=True, default='')
-    user_name = models.CharField(max_length=100, unique=True )
+    user_name = models.CharField(max_length=100, unique=True)
     email = models.CharField(max_length=100, unique=True, null=True)
     password  = models.CharField(max_length=100, unique=True )
     description = models.TextField(blank=True, null=True, default='')
@@ -163,6 +164,7 @@ class Task(BusinessModel):
     sprint = models.ForeignKey(Sprint,  db_column='id_sprint',related_name='tasks' ,blank=True, null=True)
     responsible = models.ForeignKey(ScrumUser,  db_column='id_scrumuser',related_name='tasks' ,blank=True, null=True)
     project = models.ForeignKey(Project,  db_column='id_project',related_name='tasks' ,blank=True, null=True)
+    typeContinuousActivity = models.ForeignKey(TypeContinuousActivity, db_column='id_typeContinuousActivity', blank=True, null=True)
 
     def __str__(self):
         return self.name
